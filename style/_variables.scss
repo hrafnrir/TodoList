@@ -1,0 +1,66 @@
+// light theme
+
+.light-theme {
+    --todo-background-color: #FFFFFF;
+    --active-text-color: #3F3F3F;
+    --completed-text-color: #D1D1D1;
+    --main-text-color: #9E9E9E;
+    --border-color: #EAEAEA;
+    --page-background-color: #F5F5F5;
+    --grad-light-color: #C5E3FF;
+    --grad-dark-color: #6AB8FF;
+    --active-filter-color: #6AB8FF;
+    --accent-text-color: #FF5732;
+
+    --theme-button-icon: url("../img/icons/sun.svg");
+    --delete-icon: url("../img/icons/light theme/delete.svg");
+    --delete-hover-icon: url("../img/icons/light theme/delete-hover.svg");
+    --pen-icon: url("../img/icons/light theme/pen.svg");
+    --pen-hover-icon: url("../img/icons/light theme/pen-hover.svg");
+    --checkbox-icon: url("../img/icons/light theme/checkbox.svg");
+    --checkbox-hover-icon: url("../img/icons/light theme/checkbox-hover.svg");
+    --checkbox-checked-icon: url("../img/icons/light theme/checkbox-checked.svg");
+    --plus-icon: url("../img/icons/light theme/plus.svg");
+
+    --theme-button-width: 33px;
+    --theme-button-small-width: 24px;
+}
+
+// dark theme
+
+.dark-theme {
+    --todo-background-color: #222222;
+    --active-text-color: #D1D1D1;
+    --completed-text-color: #3F3F3F;
+    --main-text-color: #666666;
+    --border-color: #1B1A1A;
+    --page-background-color: #1D1D1D;
+    --grad-light-color: #2D4860;
+    --grad-dark-color: #132C43;
+    --active-filter-color: #2D4860;
+    --accent-text-color: #872F1C;
+
+    --theme-button-icon: url("../img/icons/moon.svg");
+    --delete-icon: url("../img/icons/dark theme/delete.svg");
+    --delete-hover-icon: url("../img/icons/dark theme/delete-hover.svg");
+    --pen-icon: url("../img/icons/dark theme/pen.svg");
+    --pen-hover-icon: url("../img/icons/dark theme/pen-hover.svg");
+    --checkbox-icon: url("../img/icons/dark theme/checkbox.svg");
+    --checkbox-hover-icon: url("../img/icons/dark theme/checkbox-hover.svg");
+    --checkbox-checked-icon: url("../img/icons/dark theme/checkbox-checked.svg");
+    --plus-icon: url("../img/icons/dark theme/plus.svg");
+
+    --theme-button-width: 28px;
+    --theme-button-small-width: 20px;
+}
+
+// breakpoints
+
+@mixin breakpoint($point) {
+    @if $point == large {
+        @media screen and (min-width: 1200px) {@content;}
+    }
+    @else if $point == medium {
+        @media screen and (min-width: 560px) {@content;}
+    }
+}

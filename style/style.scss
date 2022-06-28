@@ -1,0 +1,606 @@
+@import "reset";
+@import "variables";
+@import "container";
+@import "typography";
+
+
+// base style
+
+body {
+	color: var(--main-text-color);
+	background-color: var(--page-background-color);
+    @include p-normal;
+}
+
+.background {
+    position: relative;
+    max-height: 240px;
+
+    @include breakpoint(medium) {
+        max-height: 360px;     
+    }
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -10;
+		background-image: linear-gradient(95deg, var(--grad-light-color) 0%, var(--grad-dark-color) 100%);
+
+        @include breakpoint(medium) {
+            background-image: linear-gradient(105deg, var(--grad-light-color) 30%, var(--grad-dark-color) 90%); 
+        }
+	}
+}
+
+.container {
+    @include container;
+}
+
+.hidden-element {
+    z-index: -10;
+    display: none !important;
+}
+
+
+// page header 
+
+.page-header {
+    padding-top: 60px;
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+    @include breakpoint(medium) {
+        padding-top: 100px; 
+    }
+}
+
+.page-header__heading {
+    @include h1;
+    display: inline-block;
+    color: var(--todo-background-color);
+    margin: {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 25px;
+    }
+}
+
+.page-header__theme-btn {
+    width: var(--theme-button-small-width);
+    height: 24px;
+    background: {
+        color: transparent;
+        image: var(--theme-button-icon);
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+    }
+
+    @include breakpoint(medium) {
+        width: var(--theme-button-width);
+        height: 33px;
+    }
+
+    @include breakpoint(large) {
+        cursor: pointer;
+        transition: filter 1s;
+    }
+
+    &:hover {
+        @include breakpoint(large) {
+            filter: drop-shadow(0px 0px 20px #FFF8B5)
+                    drop-shadow(0px 0px 20px rgba(255, 248, 181, 0.5));
+            transition: filter 1s;
+        }
+    }
+}
+
+
+// todo 
+
+// todo header
+
+.todo {
+    margin-top: 36px;
+
+    @include breakpoint(medium) {
+        margin-top: 60px;
+    }
+}
+
+.todo__todo-header {
+    position: relative;
+    width: 100%;
+    padding: 14px 10px;
+    height: 46px;
+    background-color: var(--todo-background-color);
+    border-radius: 4px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.06);
+
+    @include breakpoint(medium) {
+        padding: 21px 26px;
+        height: 70px;
+        border-radius: 6px;
+    }
+}
+
+.todo-header__label {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: {
+        color: transparent;
+        image: var(--plus-icon);
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+    }
+
+    @include breakpoint(medium) {
+        width: 28px;
+        height: 28px;
+    }
+
+    @include breakpoint(large) {
+        transition: transform 1s ease;
+    }
+
+    .todo__todo-header:hover & {
+        @include breakpoint(large) {
+            transform: rotate(180deg);
+            transition: transform 1s ease;
+        }
+    }
+}
+
+.todo-header__field {
+    position: absolute;
+    top: 13px;
+    left: 38px;
+    min-width: 268px;
+    @include p-normal;
+    background-color: var(--todo-background-color);
+
+    @include breakpoint(medium) {
+        top: 26px;
+        left: 80px;
+        width: 434px;
+    }
+
+    &::placeholder {
+        color: var(--main-text-color);
+        font-style: italic;
+    }
+
+    &:focus {
+		color: var(--active-text-color);
+        font-style: normal;
+
+		&::placeholder {
+			opacity: 0;
+		}
+    }
+}
+
+
+// todo list
+
+.todo__main-block {
+    margin-top: 22px;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+
+    @include breakpoint(medium) {
+        margin-top: 26px;
+        box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+        border-radius: 6px;
+    }
+}
+
+.todo-list__list {
+    padding-top: 4px;
+    background-color: var(--todo-background-color);
+    border-top: {
+        left-radius: 4px;
+        right-radius: 4px;
+    }
+
+    @include breakpoint(medium) {
+        padding-top: 6px;
+        border-top: {
+            left-radius: 6px;
+            right-radius: 6px;
+        }
+    }
+}
+
+.list__item {
+    position: relative;
+    width: 100%;
+    padding: 14px 10px;
+    min-height: 46px;
+    background-color: var(--todo-background-color);
+    border-bottom: 1px solid var(--border-color);
+
+    @include breakpoint(medium) {
+        padding: 21px 26px;
+        min-height: 75px;
+    }
+
+    @include breakpoint(large) {
+        cursor: pointer;
+    }
+}
+
+.list__item-checkbox {
+    opacity: 0;
+	z-index: -1;
+	position: absolute;
+    top: 18px;
+    left: 12px;
+
+    @include breakpoint(medium) {
+        top: 28px;
+        left: 32px;
+    }
+}
+
+.list__item-label {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 59px);
+    padding-left: 28px;
+    color: var(--active-text-color);
+    @include p-normal;
+
+    @include breakpoint(medium) {
+        width: 405px;
+        padding-left: 54px;
+    }
+
+    @include breakpoint(large) {
+        cursor: pointer;
+    }
+
+    .list__item-checkbox:checked + & &-text {
+        color: var(--completed-text-color);
+        text-decoration: line-through;
+    }
+
+    &-text {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        overflow-wrap: break-word;
+
+        @include breakpoint(medium) {
+            padding-top: 4px;
+        }
+    }
+
+    &:before {
+		content: "";
+		display: inline-block;
+		position: absolute;
+		top: 1px;
+		left: 0;
+		width: 18px;
+		height: 18px;
+        background: {
+            image: var(--checkbox-icon);
+            position: top;
+            repeat: no-repeat;
+            size: cover;
+        }
+
+        @include breakpoint(medium) {
+            width: 28px;
+            height: 28px;
+        }
+
+        @include breakpoint(large) {
+            transition: background-image 0.2s linear;
+        }
+
+        .list__item:hover & {
+            @include breakpoint(large) {
+                background-image: var(--checkbox-hover-icon);
+                transition: background-image 0.2s linear;
+            }
+        }
+
+		.list__item-checkbox:checked + & {
+            width: 20px;
+			background-image: var(--checkbox-checked-icon);
+
+            @include breakpoint(medium) {
+                width: 31px;
+            }
+		}
+	}
+}
+
+.list__item-edit-input {
+    z-index: 10;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    width: 266px;
+    background-color: var(--todo-background-color);
+    color: var(--active-text-color);
+    @include p-normal;
+
+    @include breakpoint(medium) {
+        top: 15px;
+        left: 26px;
+        width: 457px;
+        padding: 10px 0;
+    }
+}
+
+.list__item-edit-btn {
+    position: absolute;
+    top: 16px;
+    right: 41px;
+    width: 16px;
+    height: 16px;
+    background: {
+        color: transparent;
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+        image: var(--pen-icon);
+    }
+
+    @include breakpoint(medium) {
+        top: 27px;
+        right: 62px;
+        width: 22px;
+        height: 22px;
+    }
+
+    @include breakpoint(large) {
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 0.4s linear 0.4s;
+    }
+
+    .list__item:hover & {
+        @include breakpoint(large) {
+            opacity: 1;
+            transition: {
+                property: opacity, background-image;
+                duration: 0.4s, 0,2s;
+                timing-function: linear;
+                delay: 0.4s, 0s;
+            };
+        }
+    }
+
+    .list__item:hover &:hover {
+        @include breakpoint(large) {
+            opacity: 1;
+            background-image: var(--pen-hover-icon);
+            transition: background-image 0.2s linear;
+        }
+    }
+}
+
+.list__item-delete-btn {
+    position: absolute;
+    top: 18px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+    background: {
+        color: transparent;
+        repeat: no-repeat;
+        position: center;
+        size: cover;
+        image: var(--delete-icon);
+    }
+    
+    @include breakpoint(medium) {
+        top: 29px;
+        right: 26px;
+        width: 16px;
+        height: 16px;
+    }
+
+    @include breakpoint(large) {
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 0.4s linear;
+    }
+
+    .list__item:hover & {
+        @include breakpoint(large) {
+            opacity: 1;
+            transition: {
+                property: opacity, background-image;
+                duration: 0.4s, 0.2s;
+                timing-function: linear;
+            };
+        }
+    }
+
+    .list__item:hover &:hover {
+        @include breakpoint(large) {
+            opacity: 1;
+            background-image: var(--delete-hover-icon);
+            transition: background-image 0.2s linear;
+        }
+    }
+}
+
+
+// todo footer
+
+.todo__todo-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 18px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--todo-background-color);
+    border-bottom: {
+        left-radius: 4px;
+        right-radius: 4px;
+    }
+
+    @include breakpoint(medium) {
+        padding: 20px 26px;
+        border-bottom: {
+            left-radius: 6px;
+            right-radius: 6px;
+        }
+    }
+}
+
+.todo-footer__total {
+    @include p-small;
+    color: var(--main-text-color);
+    text-align: left;
+
+    @include breakpoint(medium) {
+        text-align: auto;
+    }
+}
+
+.todo-footer__filters-list {
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.todo-footer__filter {
+    @include p-medium;
+    color: var(--main-text-color);
+    margin-right: 10px;
+
+    @include breakpoint(medium) {
+        margin-right: 15px;
+        cursor: pointer;
+    }
+
+    @include breakpoint(large) {
+        transition: color 0.2s linear;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        @include breakpoint(large) {
+            color: var(--active-text-color);
+            transition: color 0.2s linear;
+        }
+    }
+
+    &:active {
+        color: var(--active-filter-color);
+    }
+
+    &[data-filter-status="selected"] {
+        color: var(--active-filter-color);
+    }
+
+    &_non-active {
+        cursor: default;
+
+        &:hover, &:active {
+            color: var(--main-text-color);
+        }
+    }
+}
+
+.todo-footer__clear-btn {
+    display: inline;
+    @include p-small;
+    color: var(--main-text-color);
+    background-color: transparent;
+    margin-left: auto;
+    text-align: right;
+
+    @include breakpoint(medium) {
+        text-align: auto;
+    }
+
+    @include breakpoint(large) {
+        cursor: pointer;
+        transition: color 0.2s linear;
+    }
+
+    &:hover, &:active {
+        color: var(--accent-text-color);
+
+        @include breakpoint(large) {
+            transition: color 0.2s linear;
+        }
+    }
+}
+
+
+// footer
+
+.page-footer {
+    margin-top: 36px;
+    padding-bottom: 36px;
+
+    &_without-items {
+        margin-top: 80px;
+    }
+
+    @include breakpoint(medium) {
+        margin-top: 44px;
+        padding-bottom: 60px;
+        
+        &_without-items {
+            margin-top: 100px;
+        }
+    }
+}
+
+.page-footer__item {
+    @include p-small;
+    color: var(--main-text-color);
+    text-align: center;
+    margin-bottom: 14px;
+
+    @include breakpoint(medium) {
+        margin-bottom: 16px;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.page-footer__theme-btn {
+    background-color: transparent;
+    @include p-small;
+    color: var(--main-text-color);
+
+    @include breakpoint(large) {
+        cursor: pointer;
+        transition: color 0.2s linear;
+    }
+
+    &:hover {
+        @include breakpoint(large) {
+            color: var(--active-text-color);
+            transition: color 0.2s linear;
+        }
+    }
+    &:active {
+        color: var(--active-text-color);
+    }
+}

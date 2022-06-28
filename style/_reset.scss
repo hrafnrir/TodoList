@@ -1,0 +1,27 @@
+* {
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+
+article, aside, footer, header, nav, section, figcaption { 
+	display: block; 
+}
+
+ul, ol {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+textarea {
+	resize: none;
+}

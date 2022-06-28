@@ -1,0 +1,62 @@
+$main-font-family: Roboto, Arial, sans-serif;
+
+@mixin main-font {
+    font: {
+        family: $main-font-family;
+        style: normal;
+    }
+    letter-spacing: 0.1em;
+}
+
+@mixin h1 {
+    @include main-font;
+    font: {
+        weight: 900;
+        size: 36px; 
+    }
+    line-height: 116%;
+    text-transform: uppercase;
+
+    @include breakpoint(medium) {
+        font-size: 51px;       
+    }
+}
+
+@mixin p-normal {
+    @include main-font;
+    font: {
+        weight: 400;
+        size: 14px;
+    }
+    line-height: 150%;
+
+    @include breakpoint(medium) {
+        font-size: 16px;       
+    }
+}
+
+@mixin p-medium {
+    @include main-font;
+    font: {
+        weight: 500;
+        size: 12px;
+    }
+    line-height: 100%;
+
+    @include breakpoint(medium) {
+        font-size: 14px;       
+    }
+}
+
+@mixin p-small {
+    @include main-font;
+    font: {
+        weight: 400;
+        size: 10px;
+    }
+    line-height: 116%;
+
+    @include breakpoint(medium) {
+        font-size: 12px;       
+    }
+}

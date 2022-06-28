@@ -1,0 +1,19 @@
+@mixin container {
+	min-width: 316px;
+	margin: {
+		top: 0;
+		bottom: 0;
+		left: 22px;
+		right: 22px;
+	}
+	padding: 0;
+	box-sizing: content-box;
+
+	@include breakpoint(medium) {
+		max-width: 540px;
+		margin: {
+			left: auto;
+			right: auto;
+		}    
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="Todo list — finally become focused, organized and calm">
+	    <meta name="keywords" content="todo list, task manager">
+        <title>Todo list</title>
+		<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="style/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,900;1,400&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="background">
+            <div class="container">
+                <header class="page-header">
+                    <h1 class="page-header__heading">Todo list</h1>
+                    <button class="page-header__theme-btn"></button>
+                </header>
+
+                <section class="todo">
+                    <header class="todo__todo-header">
+                        <label class="todo-header__label" for="new-todo-field"></label>
+                        <input class="todo-header__field" id="new-todo-field" type="text" name="new-todo" placeholder="What needs to be done?" required>
+                    </header>
+                    <div class="todo__main-block">
+                        <section class="todo__todo-list">
+                            <ul class="todo-list__list"></ul>
+                        </section>
+                        <footer class="todo__todo-footer">
+                            <span class="todo-footer__total"><span class="total__number">0</span> items left</span>
+                            <ul class="todo-footer__filters-list">
+                                <li class="todo-footer__filter" data-filter-status="selected" data-name="all">All</li>
+                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="active">Active</li>
+                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="completed">Completed</li>
+                            </ul>
+                            <button class="todo-footer__clear-btn hidden-element">Clear completed</button>
+                        </footer>
+                    </div>
+                </section>
+
+                <footer class="page-footer">
+                    <ul class="page-footer__list">
+                        <li class="page-footer__item">Use pen to edit a todo</li>
+                        <li class="page-footer__item"><button class="page-footer__theme-btn"></button></li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
+
+        <img src="/img/icons/light theme/checkbox-hover.svg" hidden>
+        <img src="/img/icons/light theme/checkbox-checked.svg" hidden>
+        <img src="/img/icons/dark theme/checkbox-hover.svg" hidden>
+        <img src="/img/icons/dark theme/checkbox-checked.svg" hidden>
+
+        <script src="script/color-theme.js"></script>
+        <script src="script/app.js"></script>
+        
+    </body>
+</html>
