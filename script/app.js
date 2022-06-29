@@ -400,9 +400,9 @@ let deleteTodoItem = function(index) {
     todoTotalNumber.textContent = i;
 
     updateTodoItems();
-    saveTodoItems();
     removeTodoFooter();
     checkEmptyFilter();
+    saveTodoItems();
 };
 
 
@@ -417,7 +417,7 @@ todoClearBtn.addEventListener('click', event => {
     });
 
     updateTodoItems()
-    saveTodoItems();
     removeTodoFooter();
     checkEmptyFilter();
+    saveTodoItems();
 });
