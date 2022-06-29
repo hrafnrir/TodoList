@@ -9,6 +9,7 @@
 body {
 	color: var(--main-text-color);
 	background-color: var(--page-background-color);
+
     @include p-normal;
 }
 
@@ -60,7 +61,6 @@ body {
 }
 
 .page-header__heading {
-    @include h1;
     display: inline-block;
     color: var(--todo-background-color);
     margin: {
@@ -69,6 +69,8 @@ body {
         left: 0;
         right: 25px;
     }
+
+    @include h1;
 }
 
 .page-header__theme-btn {
@@ -163,12 +165,13 @@ body {
     position: absolute;
     top: 13px;
     left: 38px;
-    min-width: 268px;
-    @include p-normal;
+    width: calc(100% - 52px);
     background-color: var(--todo-background-color);
 
+    @include p-normal;
+
     @include breakpoint(medium) {
-        top: 26px;
+        top: 24px;
         left: 80px;
         width: 434px;
     }
@@ -257,6 +260,7 @@ body {
     max-width: calc(100% - 59px);
     padding-left: 28px;
     color: var(--active-text-color);
+
     @include p-normal;
 
     @include breakpoint(medium) {
@@ -331,9 +335,10 @@ body {
     position: absolute;
     top: 14px;
     left: 10px;
-    width: 266px;
+    width: calc(100% - 51px);
     background-color: var(--todo-background-color);
     color: var(--active-text-color);
+
     @include p-normal;
 
     @include breakpoint(medium) {
@@ -449,6 +454,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    min-height: 44px;
     background-color: var(--todo-background-color);
     border-bottom: {
         left-radius: 4px;
@@ -481,9 +487,10 @@ body {
 }
 
 .todo-footer__filter {
-    @include p-medium;
     color: var(--main-text-color);
     margin-right: 10px;
+
+    @include p-medium;
 
     @include breakpoint(medium) {
         margin-right: 15px;
@@ -524,11 +531,12 @@ body {
 
 .todo-footer__clear-btn {
     display: inline;
-    @include p-small;
     color: var(--main-text-color);
     background-color: transparent;
     margin-left: auto;
     text-align: right;
+
+    @include p-small;
 
     @include breakpoint(medium) {
         text-align: auto;
@@ -570,10 +578,11 @@ body {
 }
 
 .page-footer__item {
-    @include p-small;
     color: var(--main-text-color);
     text-align: center;
     margin-bottom: 14px;
+
+    @include p-small;
 
     @include breakpoint(medium) {
         margin-bottom: 16px;
@@ -586,8 +595,9 @@ body {
 
 .page-footer__theme-btn {
     background-color: transparent;
-    @include p-small;
     color: var(--main-text-color);
+
+    @include p-small;
 
     @include breakpoint(large) {
         cursor: pointer;
