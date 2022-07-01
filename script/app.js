@@ -193,13 +193,12 @@ let createTodoItem = function(value) {
 
     let newTodoItemCheckbox = document.createElement('input');
     newTodoItemCheckbox.className = 'list__item-checkbox';
-    newTodoItemCheckbox.id = `item-checkbox-field-${n}`;
     newTodoItemCheckbox.setAttribute('type', 'checkbox');
     newTodoItemCheckbox.setAttribute('data-group-number', `${n}`);
 
     let newTodoItemLabel = document.createElement('label');
     newTodoItemLabel.className = 'list__item-label';
-    newTodoItemLabel.setAttribute('for', `item-checkbox-field-${n}`);
+    newTodoItemLabel.textContent = value;
     newTodoItemLabel.setAttribute('data-group-number', `${n}`);
 
     let newTodoItemInput = document.createElement('input');
@@ -208,21 +207,11 @@ let createTodoItem = function(value) {
     newTodoItemInput.setAttribute('type', 'text');
     newTodoItemInput.setAttribute('data-group-number', `${n}`);
 
-    let newTodoItemSpan = document.createElement('span');
-    newTodoItemSpan.className = 'list__item-label-text';
-    newTodoItemSpan.setAttribute('data-group-number', `${n}`);
-    newTodoItemSpan.textContent = value;
-
-    let newTodoItemEditBtn = document.createElement('button');
-    newTodoItemEditBtn.className = 'list__item-edit-btn';
-    newTodoItemEditBtn.setAttribute('data-group-number', `${n}`);
-
     let newTodoItemDeleteBtn = document.createElement('button');
     newTodoItemDeleteBtn.className = 'list__item-delete-btn';
     newTodoItemDeleteBtn.setAttribute('data-group-number', `${n}`);
     
-    newTodoItemLabel.append(newTodoItemSpan);
-    newTodoItemLi.append(newTodoItemCheckbox, newTodoItemLabel, newTodoItemInput, newTodoItemEditBtn, newTodoItemDeleteBtn);
+    newTodoItemLi.append(newTodoItemCheckbox, newTodoItemLabel, newTodoItemInput, newTodoItemDeleteBtn);
     todoList.prepend(newTodoItemLi);
 
     n++;
@@ -252,15 +241,6 @@ todoList.addEventListener('click', event => {
 let changeTodoItemStatus = function(checkbox, index) {
     let li = document.querySelector(`li[data-group-number="${index}"]`);
 
-    let allButtons = document.querySelectorAll(`button[data-group-number="${index}"]`);
-    let button;
-
-    for (let m = 0; m < allButtons.length; m++) {
-        if (allButtons[m].classList.contains('list__item-edit-btn')) {
-            button = allButtons[m];
-        };
-    };
-
     if (checkbox.checked == true) {
         if (document.querySelector('li[data-status="completed"]')) {
             let itemsCompleted = document.querySelectorAll('li[data-status="completed"]');
@@ -272,15 +252,11 @@ let changeTodoItemStatus = function(checkbox, index) {
             todoList.append(li);
         };
 
-        button.classList.add('hidden-element');
-
         i = getNumberOfTodoItems('active');
         todoTotalNumber.textContent = i;
     } else {
         li.dataset.status = 'active';
         todoList.prepend(li);
-
-        button.classList.remove('hidden-element');
 
         i = getNumberOfTodoItems('active');
         todoTotalNumber.textContent = i;
@@ -293,9 +269,9 @@ let changeTodoItemStatus = function(checkbox, index) {
 
 // change the text content of the item
 
-todoList.addEventListener('click', event => {
+todoList.addEventListener('dblclick', event => {
     let target = event.target;
-    if (!target.classList.contains('list__item-edit-btn')) {
+    if (!target.classList.contains('list__item-label')) {
         return;
     } else {
         let index = target.dataset.groupNumber;
@@ -304,42 +280,52 @@ todoList.addEventListener('click', event => {
 });
 
 
-let changeItem = function(button, index) {
+let changeItem = function(label, index) {
     let allInputs = document.querySelectorAll(`input[data-group-number="${index}"]`);
     let input;
+    let checkbox;
 
     for (let m = 0; m < allInputs.length; m++) {
         if (allInputs[m].classList.contains('list__item-edit-input')) {
             input = allInputs[m];
+        } else {
+            checkbox = allInputs[m];
         };
     };
 
-    let span = document.querySelector(`span[data-group-number="${index}"]`);
-    let li = document.querySelector(`li[data-group-number="${index}"]`);
-
-    let previousValue = span.textContent;
+    let previousValue = label.textContent;
     input.value = previousValue;
-    span.textContent = '';
+    label.textContent = '';
         
-    button.classList.add('hidden-element');
+    label.classList.add('hidden-element');
+    checkbox.classList.add('hidden-element');
+
     input.classList.remove('hidden-element');
     input.focus();
 
+    let saveChanges = function() {
+        if (input.value.trim() === previousValue || input.value.trim() === '') {
+            label.textContent = previousValue;
+
+            label.classList.remove('hidden-element');
+            checkbox.classList.remove('hidden-element');
+
+            input.classList.add('hidden-element');
+        } else {
+            label.textContent = input.value.trim();
+
+            label.classList.remove('hidden-element');
+            checkbox.classList.remove('hidden-element');
+
+            input.classList.add('hidden-element');
+
+            saveTodoItems();
+        };
+    };
+
     let enterClick = function(event) {
         if (event.code === 'Enter') {
-            if (input.value.trim() === previousValue || input.value.trim() === '') {
-                span.textContent = previousValue;
-
-                button.classList.remove('hidden-element');
-                input.classList.add('hidden-element');
-            } else {
-                span.textContent = input.value.trim();
-
-                button.classList.remove('hidden-element');
-                input.classList.add('hidden-element');
-
-                saveTodoItems();
-            };
+            saveChanges();
             input.removeEventListener('keyup', enterClick);
         };
     };
@@ -347,15 +333,10 @@ let changeItem = function(button, index) {
     input.addEventListener('keyup', enterClick);
 
     document.addEventListener('click', event => {
-        const withinBoundaries = event.composedPath().includes(li);
+        const withinBoundaries = event.composedPath().includes(input);
              
         if (!withinBoundaries) {
-            if (input.value.trim() === previousValue || input.value.trim() === '') {
-                span.textContent = previousValue;
-        
-                button.classList.remove('hidden-element');
-                input.classList.add('hidden-element');
-            };
+            saveChanges();
         };
     });
 };

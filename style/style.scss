@@ -29,10 +29,14 @@ body {
 		width: 100%;
 		height: 100%;
 		z-index: -10;
-		background-image: linear-gradient(95deg, var(--grad-light-color) 0%, var(--grad-dark-color) 100%);
+		background-image: linear-gradient(95deg, 
+                          var(--grad-light-color) 0%, 
+                          var(--grad-dark-color) 100%);
 
         @include breakpoint(medium) {
-            background-image: linear-gradient(105deg, var(--grad-light-color) 30%, var(--grad-dark-color) 90%); 
+            background-image: linear-gradient(105deg, 
+                              var(--grad-light-color) 30%, 
+                              var(--grad-dark-color) 90%); 
         }
 	}
 }
@@ -227,74 +231,67 @@ body {
 .list__item {
     position: relative;
     width: 100%;
-    padding: 14px 10px;
     min-height: 46px;
-    background-color: var(--todo-background-color);
     border-bottom: 1px solid var(--border-color);
 
     @include breakpoint(medium) {
-        padding: 21px 26px;
-        min-height: 75px;
-    }
-
-    @include breakpoint(large) {
-        cursor: pointer;
+        min-height: 70px;
     }
 }
 
 .list__item-checkbox {
     opacity: 0;
-	z-index: -1;
+	z-index: 10;
 	position: absolute;
-    top: 18px;
-    left: 12px;
+    top: 13px;
+    left: 10px;
+    width: 18px;
+    height: 18px;
 
     @include breakpoint(medium) {
-        top: 28px;
-        left: 32px;
+        top: 20px;
+        left: 26px;
+        width: 28px;
+        height: 28px;
+    }
+
+    @include breakpoint(large) {
+        cursor: pointer;
     }
 }
 
 .list__item-label {
     position: relative;
     display: inline-block;
-    max-width: calc(100% - 59px);
-    padding-left: 28px;
+    width: 100%;
+    padding: 12px 38px;
+    min-height: 45px;
     color: var(--active-text-color);
+    overflow-wrap: break-word;
 
     @include p-normal;
 
     @include breakpoint(medium) {
-        width: 405px;
-        padding-left: 54px;
+        padding: {
+            top: 23px;
+            bottom: 19px;
+            right: 68px;
+            left: 80px;
+        }
+        min-height: 69px;
     }
 
-    @include breakpoint(large) {
-        cursor: pointer;
-    }
-
-    .list__item-checkbox:checked + & &-text {
+    .list__item-checkbox:checked + & {
         color: var(--completed-text-color);
         text-decoration: line-through;
-    }
-
-    &-text {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        overflow-wrap: break-word;
-
-        @include breakpoint(medium) {
-            padding-top: 4px;
-        }
     }
 
     &:before {
 		content: "";
 		display: inline-block;
 		position: absolute;
-		top: 1px;
-		left: 0;
+		top: 13px;
+		left: 10px;
 		width: 18px;
 		height: 18px;
         background: {
@@ -305,6 +302,8 @@ body {
         }
 
         @include breakpoint(medium) {
+            top: 20px;
+		    left: 26px;
             width: 28px;
             height: 28px;
         }
@@ -313,7 +312,7 @@ body {
             transition: background-image 0.2s linear;
         }
 
-        .list__item:hover & {
+        .list__item-checkbox:hover + & {
             @include breakpoint(large) {
                 background-image: var(--checkbox-hover-icon);
                 transition: background-image 0.2s linear;
@@ -334,73 +333,24 @@ body {
 .list__item-edit-input {
     z-index: 10;
     position: absolute;
-    top: 14px;
+    top: 12px;
     left: 10px;
-    width: calc(100% - 51px);
+    width: calc(100% - 48px);
     background-color: var(--todo-background-color);
     color: var(--active-text-color);
 
     @include p-normal;
 
     @include breakpoint(medium) {
-        top: 15px;
+        top: 23px;
         left: 26px;
-        width: 457px;
-        padding: 10px 0;
-    }
-}
-
-.list__item-edit-btn {
-    position: absolute;
-    top: 16px;
-    right: 41px;
-    width: 16px;
-    height: 16px;
-    background: {
-        color: transparent;
-        repeat: no-repeat;
-        position: center;
-        size: cover;
-        image: var(--pen-icon);
-    }
-
-    @include breakpoint(medium) {
-        top: 27px;
-        right: 62px;
-        width: 22px;
-        height: 22px;
-    }
-
-    @include breakpoint(large) {
-        opacity: 0;
-        cursor: pointer;
-        transition: opacity 0.4s linear 0.4s;
-    }
-
-    .list__item:hover & {
-        @include breakpoint(large) {
-            opacity: 1;
-            transition: {
-                property: opacity, background-image;
-                duration: 0.4s, 0,2s;
-                timing-function: linear;
-                delay: 0.4s, 0s;
-            };
-        }
-    }
-
-    .list__item:hover &:hover {
-        @include breakpoint(large) {
-            opacity: 1;
-            background-image: var(--pen-hover-icon);
-            transition: background-image 0.2s linear;
-        }
+        width: calc(100% - 94px);
     }
 }
 
 .list__item-delete-btn {
     position: absolute;
-    top: 18px;
+    top: 17px;
     right: 14px;
     width: 12px;
     height: 12px;
@@ -413,7 +363,7 @@ body {
     }
     
     @include breakpoint(medium) {
-        top: 29px;
+        top: 27px;
         right: 26px;
         width: 16px;
         height: 16px;
@@ -432,7 +382,7 @@ body {
                 property: opacity, background-image;
                 duration: 0.4s, 0.2s;
                 timing-function: linear;
-            };
+            }
         }
     }
 
@@ -495,10 +445,10 @@ body {
 
     @include breakpoint(medium) {
         margin-right: 15px;
-        cursor: pointer;
     }
 
     @include breakpoint(large) {
+        cursor: pointer;
         transition: color 0.2s linear;
     }
 
@@ -611,6 +561,7 @@ body {
             transition: color 0.2s linear;
         }
     }
+    
     &:active {
         color: var(--active-text-color);
     }
