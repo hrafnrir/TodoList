@@ -36,15 +36,15 @@ let initTodoItems = function() {
     if (itemsFromLS) {
         todoList.innerHTML = itemsFromLS;
 
-        if (document.querySelector('li[data-status="completed"]')) {
-            let completedItems = document.querySelectorAll('li[data-status="completed"]');
+        if (todoList.querySelector('li[data-status="completed"]')) {
+            let completedItems = todoList.querySelectorAll('li[data-status="completed"]');
             for (let m = 0; m < completedItems.length; m++) {
                 let completedCheckbox = completedItems[m].querySelector('.list__item-checkbox');
                 completedCheckbox.checked = 'true';
             };
         };
 
-        let allItems = document.querySelectorAll('.list__item');
+        let allItems = todoList.querySelectorAll('.list__item');
         let maxNumber = +allItems[0].getAttribute('data-group-number');
             
         for (let m = 1; m < allItems.length; m++) {
@@ -55,6 +55,13 @@ let initTodoItems = function() {
         };
 
         n = ++maxNumber;
+
+        if (todoList.querySelector('li.hidden-element')) {
+            let hiddenItems = todoList.querySelectorAll('li.hidden-element');
+            hiddenItems.forEach((item) => {
+                item.classList.remove('hidden-element');
+            });
+        };
     };
 };
 
@@ -252,18 +259,27 @@ let changeTodoItemStatus = function(checkbox, index) {
             todoList.append(li);
         };
 
+        if (todoFilterActive.dataset.filterStatus === 'selected') {
+            getFilteredTodoItems('active');
+        };
+
         i = getNumberOfTodoItems('active');
         todoTotalNumber.textContent = i;
     } else {
         li.dataset.status = 'active';
         todoList.prepend(li);
 
+        if (todoFilterCompleted.dataset.filterStatus === 'selected') {
+            getFilteredTodoItems('completed');
+        };
+
         i = getNumberOfTodoItems('active');
         todoTotalNumber.textContent = i;
     };
 
-    saveTodoItems();
     addFilters();
+    checkEmptyFilter();
+    saveTodoItems();
 };
 
 
