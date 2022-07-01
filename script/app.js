@@ -165,7 +165,7 @@ removeTodoFooter();
 todoInput.addEventListener('keyup', event => {
     if (event.code === 'Enter') {
 
-        if (todoInput.value === '') {
+        if (todoInput.value.trim() === '') {
             return;
         };
 
@@ -176,7 +176,7 @@ todoInput.addEventListener('keyup', event => {
             getFilteredTodoItems();
         };
 
-        createTodoItem(todoInput.value);
+        createTodoItem(todoInput.value.trim());
         todoInput.value = '';
     };
 });
@@ -327,13 +327,13 @@ let changeItem = function(button, index) {
 
     let enterClick = function(event) {
         if (event.code === 'Enter') {
-            if (input.value === previousValue || input.value === '') {
+            if (input.value.trim() === previousValue || input.value.trim() === '') {
                 span.textContent = previousValue;
 
                 button.classList.remove('hidden-element');
                 input.classList.add('hidden-element');
             } else {
-                span.textContent = input.value;
+                span.textContent = input.value.trim();
 
                 button.classList.remove('hidden-element');
                 input.classList.add('hidden-element');
@@ -350,7 +350,7 @@ let changeItem = function(button, index) {
         const withinBoundaries = event.composedPath().includes(li);
              
         if (!withinBoundaries) {
-            if (input.value === previousValue || input.value === '') {
+            if (input.value.trim() === previousValue || input.value.trim() === '') {
                 span.textContent = previousValue;
         
                 button.classList.remove('hidden-element');
