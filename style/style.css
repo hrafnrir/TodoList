@@ -421,14 +421,8 @@ body {
   }
 }
 @media screen and (min-width: 1200px) {
-  .list__item-label:before {
-    transition: background-image 0.2s linear;
-  }
-}
-@media screen and (min-width: 1200px) {
   .list__item-checkbox:hover + .list__item-label:before {
     background-image: var(--checkbox-hover-icon);
-    transition: background-image 0.2s linear;
   }
 }
 .list__item-checkbox:checked + .list__item-label:before {

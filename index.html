@@ -17,34 +17,34 @@
             <div class="container">
                 <header class="page-header">
                     <h1 class="page-header__heading">Todo list</h1>
-                    <button class="page-header__theme-btn"></button>
+                    <button class="page-header__theme-btn" data-name="theme-btn-icon"></button>
                 </header>
 
                 <section class="todo">
                     <header class="todo__todo-header">
                         <label class="todo-header__label" for="new-todo-field"></label>
-                        <input class="todo-header__field" id="new-todo-field" type="text" name="new-todo" placeholder="What needs to be done?" required>
+                        <input class="todo-header__field" data-name="new-todo-input" id="new-todo-field" type="text" name="new-todo" placeholder="What needs to be done?" required>
                     </header>
                     <div class="todo__main-block">
                         <section class="todo__todo-list">
-                            <ul class="todo-list__list"></ul>
+                            <ul class="todo-list__list hidden-element" data-name="todo-list"></ul>
                         </section>
-                        <footer class="todo__todo-footer">
-                            <span class="todo-footer__total"><span class="total__number">0</span> items left</span>
+                        <footer class="todo__todo-footer hidden-element" data-name="todo-footer">
+                            <span class="todo-footer__total"><span class="total__number" data-name="total-number">0</span> items left</span>
                             <ul class="todo-footer__filters-list">
-                                <li class="todo-footer__filter" data-filter-status="selected" data-name="all">All</li>
-                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="active">Active</li>
-                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="completed">Completed</li>
+                                <li class="todo-footer__filter" data-filter-status="selected" data-name="filter-all">All</li>
+                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="filter-active">Active</li>
+                                <li class="todo-footer__filter" data-filter-status="non-selected" data-name="filter-completed">Completed</li>
                             </ul>
-                            <button class="todo-footer__clear-btn hidden-element">Clear completed</button>
+                            <button class="todo-footer__clear-btn hidden-element" data-name="todo-clear-btn">Clear completed</button>
                         </footer>
                     </div>
                 </section>
 
-                <footer class="page-footer">
+                <footer class="page-footer page-footer_without-items" data-name="page-footer">
                     <ul class="page-footer__list">
                         <li class="page-footer__item">Double-click to edit a todo</li>
-                        <li class="page-footer__item"><button class="page-footer__theme-btn"></button></li>
+                        <li class="page-footer__item"><button class="page-footer__theme-btn" data-name="theme-btn"></button></li>
                     </ul>
                 </footer>
             </div>
@@ -60,7 +60,12 @@
         <img src="img/icons/dark theme/delete-hover.svg" hidden>
 
         <script src="script/color-theme.js"></script>
-        <script src="script/app.js"></script>
+        <script src="script/storage.js"></script>
+        <script src="script/model.js"></script>
+        <script src="script/template.js"></script>
+        <script src="script/view.js"></script>
+        <script src="script/controller.js"></script>
+        <script src="script/main.js"></script>
         
     </body>
 </html>

@@ -308,14 +308,9 @@ body {
             height: 28px;
         }
 
-        @include breakpoint(large) {
-            transition: background-image 0.2s linear;
-        }
-
         .list__item-checkbox:hover + & {
             @include breakpoint(large) {
                 background-image: var(--checkbox-hover-icon);
-                transition: background-image 0.2s linear;
             }
         }
 
