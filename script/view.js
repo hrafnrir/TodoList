@@ -78,19 +78,22 @@ View.prototype.editTodoItem_done = function(id, input, handler) {
         if (event.keyCode === 13) {
             handler(id, input.value, title);
             input.removeEventListener('keyup', enterClick);
+            document.removeEventListener('click', clickWithinBoundaries);
         };
-    }
+    };
 
-    input.addEventListener('keyup', enterClick);
-
-    document.addEventListener('click', event => {
+    function clickWithinBoundaries(event) {
         const withinBoundaries = event.composedPath().includes(input);
 
         if (!withinBoundaries) {
             handler(id, input.value, title);
             input.removeEventListener('keyup', enterClick);
+            document.removeEventListener('click', clickWithinBoundaries);
         };
-    }, {once: true});
+    }
+
+    input.addEventListener('keyup', enterClick);
+    document.addEventListener('click', clickWithinBoundaries);
 };
 
 
